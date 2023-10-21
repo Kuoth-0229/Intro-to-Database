@@ -1,4 +1,5 @@
 CREATE TABLE public.colors(
+	
 	id VARCHAR(15),
     name VARCHAR(50),
     rgb CHAR(6),
