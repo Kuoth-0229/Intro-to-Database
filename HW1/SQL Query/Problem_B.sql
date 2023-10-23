@@ -14,4 +14,4 @@ WHERE
 GROUP BY
 	sets.year
 ORDER BY
-	total_set_nu DESC
+	total_set_num DESC
