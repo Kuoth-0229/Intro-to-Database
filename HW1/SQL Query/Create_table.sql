@@ -69,7 +69,7 @@ CREATE TABLE public.inventory_parts(
     is_spare BOOLEAN,
 	
     foreign key (inventory_id) references inventories(id),
-    foreign key (color_id) references colors(id),
+    foreign key (color_id) references colors(id)
 	--foreign key (part_num) reference parts(part_num)
 	--Due to some issues with the data, please ignore the foreign key settings for “part_num” column. 
 );
