@@ -1,26 +1,26 @@
 CREATE TABLE public.colors(
 	
-	id VARCHAR(15),
-    name VARCHAR(50),
-    rgb CHAR(6),
+	id VARCHAR(20),
+    name VARCHAR(60),
+    rgb CHAR(10),
     is_trans BOOLEAN,
 	
     primary key (id)
 );
 
 CREATE TABLE themes(
-	id VARCHAR(15),
-    name VARCHAR(100),
-    parent_id VARCHAR(15),
+	id VARCHAR(20),
+    name VARCHAR(200),
+    parent_id VARCHAR(20),
 	
     primary key (id)
 );
 
 CREATE TABLE sets(
 	set_num VARCHAR(20),
-    name VARCHAR(100),
+    name VARCHAR(200),
     year INT,
-    theme_id VARCHAR(15),
+    theme_id VARCHAR(20),
     num_parts INT,
 	
     primary key (set_num),
@@ -28,7 +28,7 @@ CREATE TABLE sets(
 );
 
 CREATE TABLE public.inventories(
-	id VARCHAR(15),
+	id VARCHAR(20),
     version INT,
     set_num VARCHAR(20),
 	
@@ -37,7 +37,7 @@ CREATE TABLE public.inventories(
 );
 
 CREATE TABLE public.inventory_sets(
-	inventory_id VARCHAR(15),
+	inventory_id VARCHAR(20),
     set_num VARCHAR(20),
     quantity INT,
 	
@@ -46,25 +46,25 @@ CREATE TABLE public.inventory_sets(
 );
 
 CREATE TABLE public.part_categories(
-    id VARCHAR(15),
-    name VARCHAR(100),
+    id VARCHAR(20),
+    name VARCHAR(200),
 	
     primary key (id)
 );
 
 CREATE TABLE public.parts(
     part_num VARCHAR(20),
-    name VARCHAR(300),
-    part_cat_id VARCHAR(15),
+    name VARCHAR(400),
+    part_cat_id VARCHAR(20),
 	
     primary key (part_num),
     foreign key (part_cat_id) references part_categories(id)
 );
 
 CREATE TABLE public.inventory_parts(
-    inventory_id VARCHAR(15),
+    inventory_id VARCHAR(20),
     part_num VARCHAR(20),
-    color_id VARCHAR(15),
+    color_id VARCHAR(20),
     quantity INT,
     is_spare BOOLEAN,
 	
