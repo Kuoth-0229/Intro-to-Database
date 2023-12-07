@@ -1,8 +1,9 @@
 -- Dropping existing views if they exist
-DROP VIEW IF EXISTS Combined_View;
-DROP VIEW IF EXISTS CountryCode_Index;
+DROP VIEW IF EXISTS combined_view;
 DROP VIEW IF EXISTS Located_In_View;
-DROP VIEW IF EXISTS stringencyindex;
+DROP VIEW IF EXISTS CountryCode_Index;
+DROP VIEW IF EXISTS StringencyIndex;
+
 
 
 -- Creating StringencyIndex view
@@ -39,33 +40,21 @@ CREATE VIEW CountryCode_Index AS
                 AND S.Date = MinLocated_In.Date
                 AND S.Continent_Code = MinLocated_In.Continent_Code);
 
--- Creating Located_In_View
-CREATE VIEW Located_In_View AS
-    SELECT
-        Country.Two_Letter_Country_Code,
-        Country.Country_Name,
-        Continents.Continent_Code,
-        Continents.Continent_Name
-    FROM
-        Country NATURAL JOIN Located_In NATURAL JOIN Continents;
-
--- Creating Combined_View
-CREATE VIEW Combined_View AS
-    SELECT
-        CCI.Date,
-        CCI.Continent_Code,
-        MaxCountry.Continent_Name AS Max_Continent_Name,
-        CCI.Maximum AS Max_Stringency_Index,
-        MaxCountry.Country_Name AS Max_Country_Name,
-        CCI.Minimum AS Min_Stringency_Index,
-        MinCountry.Continent_Name AS Min_Continent_Name,
-        MinCountry.Country_Name AS Min_Country_Name
-    FROM
-        CountryCode_Index CCI
-        LEFT JOIN Located_In_View MaxCountry
-            ON (CCI.Max_CountryCode = MaxCountry.Two_Letter_Country_Code AND CCI.Continent_Code = MaxCountry.Continent_Code)
-        LEFT JOIN Located_In_View MinCountry
-            ON (CCI.Min_CountryCode = MinCountry.Two_Letter_Country_Code AND CCI.Continent_Code = MinCountry.Continent_Code);
-
--- Example SELECT statement using the Combined_View
-SELECT * FROM Combined_View;
+-- Final SELECT statement using JOIN operations
+SELECT
+    S.Date,
+    Continents.Continent_Name,
+    S.Maximum AS Max_Stringency_Index, 
+    MaxCountry.Country_Name AS Max_Country_Name,
+    S.Minimum AS Min_Stringency_Index,
+    MinCountry.Country_Name AS Min_Country_Name
+FROM
+    CountryCode_Index S
+    LEFT JOIN Country MaxCountry
+        ON S.Max_CountryCode = MaxCountry.Two_Letter_Country_Code
+    LEFT JOIN Country MinCountry
+        ON S.Min_CountryCode = MinCountry.Two_Letter_Country_Code
+    JOIN Continents
+        ON S.Continent_Code = Continents.Continent_Code
+ORDER BY
+    S.Date, Continents.Continent_Name;
