@@ -1,3 +1,13 @@
+-- Creating Located_In_View
+CREATE VIEW Located_In_View AS
+    SELECT
+        Country.Two_Letter_Country_Code,
+        Country.Country_Name,
+        Continents.Continent_Code,
+        Continents.Continent_Name
+    FROM
+        Country NATURAL JOIN Located_In NATURAL JOIN Continents;
+
 WITH Old_MovingAverage_Country AS(
 		SELECT
 			Date,
