@@ -26,7 +26,7 @@ CREATE TABLE public.located_in
 CREATE TABLE public.Containment_and_closure_policy
 (
     Two_Letter_Country_Code     varchar(1000),
-    Date                        INT,
+    Date                        Date,
 
     C1M                 NUMERIC(3,2),
     C2M                 NUMERIC(3,2),
@@ -50,7 +50,7 @@ CREATE TABLE public.Containment_and_closure_policy
 CREATE TABLE public.Economic_policy
 (
     Two_Letter_Country_Code     varchar(1000),
-    Date                        INT,
+    Date                       Date,
 
     E1                  NUMERIC(3,2),
     E2                  NUMERIC(3,2),
@@ -64,7 +64,7 @@ CREATE TABLE public.Economic_policy
 CREATE TABLE public.Health_system_policy
 (
     Two_Letter_Country_Code     varchar(1000),
-    Date                        INT,
+    Date                        Date,
 
     H1                  NUMERIC(3,2),
     H2                  NUMERIC(3,2),
@@ -85,7 +85,7 @@ CREATE TABLE public.Health_system_policy
 CREATE TABLE public.Vaccine_policy
 (
     Two_Letter_Country_Code     varchar(1000),
-    Date                        INT,
+    Date                        Date,
 
     V1                  INT,
     V2A                 INT,
@@ -105,7 +105,7 @@ CREATE TABLE public.Vaccine_policy
 CREATE TABLE public.Statistic
 (
     Two_Letter_Country_Code     CHAR(2),
-    Date                        INT,
+    Date                        Date,
     PopulationVaccinated        NUMERIC(5,2),
     ConfirmedCases              FLOAT,
     ConfirmedDeath              FLOAT,
@@ -116,7 +116,7 @@ CREATE TABLE public.Statistic
 CREATE TABLE public.Indices
 (
     Two_Letter_Country_Code                   CHAR(2),
-    Date                                        INT,
+    Date                                        Date,
     StringencyIndex_Average_ForDisplay          NUMERIC(10,2),
     GovernmentResponseIndex_Average_ForDisplay  NUMERIC(10,2),
     ContainmentHealthIndex_Average_ForDisplay   NUMERIC(10,2),
@@ -130,7 +130,7 @@ CREATE TABLE public.OxCGRT_nat_latest
     CountryName         VARCHAR(100),
     CountryCode         CHAR(3),
     Jurisdiction        VARCHAR(20),
-    Date_               INT,
+    Date_               Date,
     C1M                 NUMERIC(3,2),
     C1M_Flag            BOOLEAN,
     C2M                 NUMERIC(3,2),
